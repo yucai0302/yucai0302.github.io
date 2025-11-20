@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Product Manager | Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Apple 风格暗色模式配色 */
+            --bg-main: #000000;
+            --text-primary: #f5f5f7; /* Apple 官网常用的近白色 */
+            --text-secondary: #86868b; /* Apple 官网常用的灰色 */
+            --accent-blue: #2997ff; /* Apple 风格的交互蓝 */
+            --section-spacing: 120px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: 'Inter', 'PingFang SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.5;
+            overflow-x: hidden; /* 防止水平滚动 */
+        }
+
+        /* 通用排版 */
+        h1 { font-size: clamp(3rem, 8vw, 5rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
+        h2 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; margin-bottom: 1.5rem; }
+        h3 { font-size: 1.5rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
+        p.lead { font-size: 1.5rem; color: var(--text-secondary); max-width: 700px; margin-bottom: 2rem; font-weight: 300; }
+        p.sub-lead { font-size: 1.1rem; color: var(--accent-blue); font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; display: block; }
+        
+        /* 布局核心 - 沉浸式板块 */
+        .immersive-section {
+            position: relative;
+            min-height: 90vh; /* 每个板块至少90%屏幕高度 */
+            display: flex;
+            align-items: center; /* 内容垂直居中 */
+            overflow: hidden;
+            padding: var(--section-spacing) 5%;
+        }
+
+        /* 视差背景层核心代码 */
+        .parallax-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120%; /* 图片高度必须大于容器高度才能滚动 */
+            background-size: cover;
+            background-position: center;
+            z-index: -1; /* 放在内容层下方 */
+            filter: brightness(0.4) contrast(1.1); /* 压暗背景，让文字更突出 */
+            will-change: transform; /* 性能优化告诉浏览器这个元素会动 */
+        }
+
+        /* 各板块背景图设置 (Placeholder Images) */
+        /* 首页 - 抽象AI感 */
+        .bg-hero { background-image: url('https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=2832&auto=format&fit=crop'); }
+        /* BIGO - 全球连接感 */
+        .bg-bigo { background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2848&auto=format&fit=crop'); }
+        /* TT语音 - 游戏与声音 */
+        .bg-tt { background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2940&auto=format&fit=crop'); background-position: bottom center; }
+        /* 小鹏 - 智能座舱科技感 */
+        .bg-xpeng { background-image: url('https://images.unsplash.com/photo-1553406900-57a619093568?q=80&w=2825&auto=format&fit=crop'); }
+
+        /* 内容层容器 */
+        .content-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            z-index: 1;
+            /* 初始状态用于滚动动画 */
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); /* Apple 风格的平滑曲线 */
+        }
+        /* 滚动触发的激活状态 */
+        .content-wrapper.reveal-active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 经历详情样式 */
+        .role-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+        .detail-block h4 { color: var(--text-primary); margin-bottom: 1rem; font-size: 1.2rem; }
+        .detail-block ul { list-style: none; padding: 0; }
+        .detail-block li { 
+            color: var(--text-secondary); 
+            margin-bottom: 1rem; 
+            padding-left: 1.5rem; 
+            position: relative;
+            font-weight: 400;
+        }
+        .detail-block li::before {
+            content: '•'; /* Apple 风格的简单圆点 */
+            color: var(--accent-blue);
+            position: absolute;
+            left: 0;
+            font-size: 1.2em;
+            line-height: 1.4;
+        }
+        /* 高亮数据 */
+        .highlight { color: var(--text-primary); font-weight: 700; }
+
+        /* 底部 footer */
+        footer { background: #111; padding: 60px 20px; text-align: center; color: var(--text-secondary); }
+        
+    </style>
+</head>
+<body>
+
+    <section class="immersive-section">
+        <div class="parallax-bg bg-hero"></div>
+        <div class="content-wrapper reveal-active">
+            <span class="sub-lead">AI Product Manager</span>
+            <h1>定义未来的<br>智能交互体验。</h1>
+            <br>
+            <p class="lead">拥有 5 年互联网产品经验，专注于 AIGC 应用落地、推荐算法策略与多模态交互。以数据驱动增长，以同理心设计体验。</p>
+            <p style="color: var(--text-secondary);">前 欢聚集团 BIGO / TT语音 / 小鹏汽车</p>
+        </div>
+    </section>
+
+    <section class="immersive-section">
+        <div class="parallax-bg bg-bigo"></div>
+        <div class="content-wrapper">
+            <span class="sub-lead">2023 - 2025 | 欢聚集团 BIGO</span>
+            <h2>全球化 AIGC 的<br>规模化落地。</h2>
+            <p class="lead">担任高级 AI 产品经理。主导直播场景下的 AIGC 内容生产工具链搭建，利用 LLM 赋能创作者生态。</p>
+            
+            <div class="role-details">
+                <div class="detail-block">
+                    <h4>关键产出</h4>
+                    <ul>
+                        <li>打造直播间 AI 实时互动助手，基于场景理解生成个性化话术，腰部主播互动率提升 <span class="highlight">25%</span>。</li>
+                        <li>负责虚拟人（Virtual Streamer）全链路产品化，实现 24h 不间断直播，内容生产成本降低 <span class="highlight">60%</span>。</li>
+                    </ul>
+                </div>
+                <div class="detail-block">
+                    <h4>核心能力</h4>
+                    <ul>
+                        <li>针对东南亚多语言市场，引入多模态向量检索优化短视频分发，次留提升 <span class="highlight">3.2%</span>。</li>
+                        <li>跨国团队协作与敏捷管理。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="immersive-section">
+        <div class="parallax-bg bg-tt"></div>
+        <div class="content-wrapper">
+            <span class="sub-lead">2021 - 2023 | TT语音</span>
+            <h2>声音社交中的<br>算法温度。</h2>
+            <p class="lead">担任平台增长部产品经理。重构语音匹配机制，平衡效率与社交体验，推动工具向社区转型。</p>
+
+            <div class="role-details">
+                <div class="detail-block">
+                    <h4>关键产出</h4>
+                    <ul>
+                        <li>重构“扩列”匹配系统，引入用户画像动态权重，匹配成功率由 45% 飞跃至 <span class="highlight">68%</span>。</li>
+                        <li>搭建 UGS (User Generated Space) 游戏社区体系，显著提升用户粘性与 DAU。</li>
+                    </ul>
+                </div>
+                <div class="detail-block">
+                    <h4>核心能力</h4>
+                    <ul>
+                        <li>协同音频算法团队优化实时降噪模型，特定游戏场景下语音投诉率下降 <span class="highlight">40%</span>。</li>
+                        <li>增长黑客策略与 A/B Test 方法论。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="immersive-section">
+        <div class="parallax-bg bg-xpeng"></div>
+        <div class="content-wrapper">
+            <span class="sub-lead">2020 - 2021 | 小鹏汽车 XPeng</span>
+            <h2>智能座舱的<br>多模态初探。</h2>
+            <p class="lead">互联网中心产品实习生。参与车载 OS 核心语音助手迭代与场景化功能定义。</p>
+
+            <div class="role-details">
+                <div class="detail-block">
+                    <h4>实习经历</h4>
+                    <ul>
+                        <li>参与小 P 语音助手意图识别优化，负责高频导航场景的语料清洗与标注策略制定。</li>
+                        <li>协助定义“冥想模式”等智能座舱场景化 PRD，跟进 OTA 版本验收，理解软硬件协同开发流程。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Designed with AI mindset. &copy; 2025</p>
+    </footer>
+
+    <script>
+        // --- 核心 Javascript 动效实现 ---
+
+        // 1. 滚动显现动画 (Scroll Reveal)
+        // 使用 IntersectionObserver 监听元素是否进入视口
+        const revealElements = document.querySelectorAll('.content-wrapper');
+
+        const revealOptions = {
+            threshold: 0.2, // 当元素 20% 进入视口时触发
+            rootMargin: "0px 0px -100px 0px" // 稍微提前一点触发
+        };
+
+        const revealOnScroll = new IntersectionObserver(function(entries, revealOnScroll) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('reveal-active');
+                    revealOnScroll.unobserve(entry.target); // 触发一次后就停止监听，提高性能
+                }
+            });
+        }, revealOptions);
+
+        revealElements.forEach(el => {
+            revealOnScroll.observe(el);
+        });
+
+
+        // 2. 视差滚动效果 (Parallax Effect)
+        // 监听滚动事件，动态改变背景图的位置
+        const parallaxBgs = document.querySelectorAll('.parallax-bg');
+
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            
+            parallaxBgs.forEach(bg => {
+                // 获取每个板块距离顶部的距离
+                const parentSection = bg.parentElement;
+                const sectionTop = parentSection.offsetTop;
+                const sectionHeight = parentSection.offsetHeight;
+
+                // 简单的视差计算公式：让背景图移动速度比滚动速度慢
+                // 只有当板块在视口内时才计算，节省性能
+                if (scrolled > sectionTop - window.innerHeight && scrolled < sectionTop + sectionHeight) {
+                    const speed = 0.3; // 调整这个数值改变视差速度 (越小越慢)
+                    const yPos = -(scrolled - sectionTop) * speed; 
+                    bg.style.transform = `translate3d(0px, ${yPos}px, 0px)`;
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
